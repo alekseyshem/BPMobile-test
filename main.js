@@ -1,16 +1,20 @@
-const langs = ["en", "de", "es", "fr", "ja", "pt"];
-const langParams = new URL(window.location.href).searchParams.get("lang");
-// let lang = document.querySelector("html").getAttribute("lang");
-let lang = navigator.language || navigator.userLanguage || "en";
+function setLang() {
+  const langs = ["en", "de", "es", "fr", "ja", "pt"];
+  const langParams = new URL(window.location.href).searchParams.get("lang");
 
-(function setLang() {
+  const fallbackLang = "en";
+  const osLang = navigator.language;
+
+  let lang;
   if (langParams && langs.includes(langParams)) {
     lang = langParams;
-    changeFontSize(lang);
+  } else if (langs.includes(osLang)) {
+    lang = osLang;
   } else {
-    lang = "en";
+    lang = fallbackLang;
   }
-})();
+  return lang;
+}
 
 function changeFontSize(lang) {
   document.querySelector(`.footer`).classList.add(`footer_text-${lang}`);
@@ -19,42 +23,61 @@ function changeFontSize(lang) {
   });
 }
 
-const response = await fetch("./i18n/" + lang + ".json");
-const translateData = await response.json();
+async function loadTranslations(lang) {
+  try {
+    const response = await fetch("/i18n/" + lang + ".json");
+    return response.json();
+  } catch (error) {
+    console.log(error);
+  }
+}
+function setTranslations(translateData) {
+  document.querySelector("[data-lang=title]").innerHTML =
+    translateData["Get Unlimited <br>Access"];
+  document.querySelector("[data-lang=img-1]").innerHTML =
+    translateData["Unlimited Art <br>Creation"];
+  document.querySelector("[data-lang=img-2]").innerHTML =
+    translateData["Exclusive <br>Styles"];
+  document.querySelector("[data-lang=img-3]").innerHTML =
+    translateData["Magic Avatars <br>With 20% Off"];
+  document.querySelector("[data-lang=action_title-1]").innerHTML =
+    translateData["YEARLY ACCESS"];
+  document.querySelector("[data-lang=action_title-2]").innerHTML =
+    translateData["WEEKLY ACCESS"];
+  document.querySelector("[data-lang=label]").innerHTML =
+    translateData["BEST OFFER"];
+  document.querySelector("[data-lang=action_description-1]").innerHTML =
+    translateData["Just {{price}} per year"].replace("{{price}}", "$39.99");
+  document.querySelector("[data-lang=price-1]").innerHTML = translateData[
+    "{{price}} <br>per week"
+  ].replace("{{price}}", "$0.48");
+  document.querySelector("[data-lang=price-2]").innerHTML = translateData[
+    "{{price}} <br>per week"
+  ].replace("{{price}}", "$6.99");
+  document.querySelector("[data-lang=button]").innerHTML =
+    translateData["Continue"];
+  document.querySelector("[data-lang=link-1]").innerHTML =
+    translateData["Terms of Use"];
+  document.querySelector("[data-lang=link-2]").innerHTML =
+    translateData["Privacy Policy"];
+  document.querySelector("[data-lang=link-3]").innerHTML =
+    translateData["Restore"];
+}
 
-document.querySelector("[data-lang=title]").innerHTML =
-  translateData["Get Unlimited <br>Access"];
-document.querySelector("[data-lang=img-1]").innerHTML =
-  translateData["Unlimited Art <br>Creation"];
-document.querySelector("[data-lang=img-2]").innerHTML =
-  translateData["Exclusive <br>Styles"];
-document.querySelector("[data-lang=img-3]").innerHTML =
-  translateData["Magic Avatars <br>With 20% Off"];
-document.querySelector("[data-lang=action_title-1]").innerHTML =
-  translateData["YEARLY ACCESS"];
-document.querySelector("[data-lang=action_title-2]").innerHTML =
-  translateData["WEEKLY ACCESS"];
-document.querySelector("[data-lang=label]").innerHTML =
-  translateData["BEST OFFER"];
-document.querySelector("[data-lang=action_description-1]").innerHTML =
-  translateData["Just {{price}} per year"].replace("{{price}}", "$39.99");
-document.querySelector("[data-lang=price-1]").innerHTML = translateData[
-  "{{price}} <br>per week"
-].replace("{{price}}", "$0.48");
-document.querySelector("[data-lang=price-2]").innerHTML = translateData[
-  "{{price}} <br>per week"
-].replace("{{price}}", "$6.99");
-document.querySelector("[data-lang=button]").innerHTML =
-  translateData["Continue"];
-document.querySelector("[data-lang=link-1]").innerHTML =
-  translateData["Terms of Use"];
-document.querySelector("[data-lang=link-2]").innerHTML =
-  translateData["Privacy Policy"];
-document.querySelector("[data-lang=link-3]").innerHTML =
-  translateData["Restore"];
+(async () => {
+  const lang = setLang();
+  changeFontSize(lang);
+
+  const translations = await loadTranslations(lang);
+  setTranslations(translations);
+})();
 
 const offers = document.querySelectorAll(".offer");
 let currentOffer = "https://apple.com/";
+
+document.querySelector(".button-continue").addEventListener("click", () => {
+  location.href = currentOffer;
+});
 
 function removeClassActive() {
   offers.forEach((offer) => {
@@ -62,23 +85,14 @@ function removeClassActive() {
   });
 }
 
-function transitionToLink() {
-  location.href = currentOffer;
+function setClassActive() {
+  offers.forEach((elem) => {
+    elem.addEventListener("click", () => {
+      removeClassActive();
+      elem.classList.add("isActive");
+      currentOffer = elem.dataset.set;
+    });
+  });
 }
 
-offers.forEach((elem) => {
-  elem.addEventListener("click", () => {
-    removeClassActive();
-    elem.classList.add("isActive");
-    switch (elem.id) {
-      case "action-1":
-        currentOffer = "https://apple.com/";
-        break;
-      case "action-2":
-        currentOffer = "https://google.com/";
-        break;
-    }
-  });
-});
-
-document.querySelector("#action-3").addEventListener("click", transitionToLink);
+setClassActive();
