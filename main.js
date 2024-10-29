@@ -31,6 +31,7 @@ async function loadTranslations(lang) {
     console.log(error);
   }
 }
+
 function setTranslations(translateData) {
   document.querySelector("[data-lang=title]").innerHTML =
     translateData["Get Unlimited <br>Access"];
@@ -64,17 +65,34 @@ function setTranslations(translateData) {
     translateData["Restore"];
 }
 
+function changeFontSizes() {
+  const elems = document.getElementsByClassName("dynamic_text");
+  console.log(elems);
+  for (let i = 0; i < elems.length; i++) {
+    let refFontSize = parseFloat(
+      window.getComputedStyle(elems[i]).getPropertyValue("font-size")
+    );
+    console.log(elems[i].offsetWidth);
+    elems[i].style.fontSize = refFontSize + "px";
+    while (elems[i].offsetWidth > elems[i].parentNode.offsetWidth) {
+      refFontSize = refFontSize - 0.5;
+      elems[i].style.fontSize = refFontSize + "px";
+      if (refFontSize <= 6) break;
+    }
+  }
+}
+
 (async () => {
   const lang = setLang();
   changeFontSize(lang);
 
   const translations = await loadTranslations(lang);
   setTranslations(translations);
+  changeFontSizes();
 })();
 
 const offers = document.querySelectorAll(".offer");
 let currentOffer = "https://apple.com/";
-
 document.querySelector(".button-continue").addEventListener("click", () => {
   location.href = currentOffer;
 });
@@ -94,5 +112,4 @@ function setClassActive() {
     });
   });
 }
-
 setClassActive();

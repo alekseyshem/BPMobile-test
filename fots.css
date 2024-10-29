@@ -1,0 +1,27 @@
+@font-face {
+  font-family: "SF Pro";
+  src: url("../fonts/SF-Pro.ttf") format("truetype");
+  font-style: normal;
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: "SF Pro Bold";
+  src: url("../fonts/SF-Pro.ttf") format("truetype");
+  font-style: normal;
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: "SF Pro Display";
+  src: url("../fonts/SF-Pro-Display-Regular.otf") format("truetype");
+  font-style: normal;
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: "SF Pro Display Bold";
+  src: url("../fonts/SFProDisplay-Bold.ttf") format("truetype");
+  font-style: normal;
+  font-weight: normal;
+}

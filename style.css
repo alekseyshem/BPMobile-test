@@ -1,30 +1,4 @@
-@font-face {
-  font-family: "SF Pro";
-  src: url("../fonts/SF-Pro.ttf") format("truetype");
-  font-style: normal;
-  font-weight: normal;
-}
-
-@font-face {
-  font-family: "SF Pro Bold";
-  src: url("../fonts/SF-Pro.ttf") format("truetype");
-  font-style: normal;
-  font-weight: bold;
-}
-
-@font-face {
-  font-family: "SF Pro Display";
-  src: url("../fonts/SF-Pro-Display-Regular.otf") format("truetype");
-  font-style: normal;
-  font-weight: normal;
-}
-
-@font-face {
-  font-family: "SF Pro Display Bold";
-  src: url("../fonts/SFProDisplay-Bold.ttf") format("truetype");
-  font-style: normal;
-  font-weight: normal;
-}
+@import url(fots.css);
 
 * {
   box-sizing: border-box;
@@ -67,27 +41,13 @@ a {
   height: 100%;
 }
 
-.header {
-  width: 100%;
-  height: 2.1rem;
-  font-size: 1.2rem;
-  line-height: 1.43rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  @media (min-height: 812px) and (max-height: 932px) and (-webkit-min-device-pixel-ratio: 3) {
-    height: 4.4rem;
-    font-size: 1.5rem;
-    line-height: 1.79rem;
-  }
-}
-
 .footer {
   font-family: "SF Pro Display";
   text-decoration: none;
   color: #ffffff;
   display: flex;
   justify-content: space-between;
+  text-wrap: nowrap;
   width: 26.2rem;
   height: 1.5rem;
   line-height: 1.49rem;
@@ -96,8 +56,12 @@ a {
   opacity: 0.5;
   margin-bottom: 1.05rem;
   @media (min-height: 812px) and (max-height: 932px) and (-webkit-min-device-pixel-ratio: 3) {
-    margin-bottom: 3.7rem;
+    margin-bottom: 3.1rem;
   }
+}
+
+.footer_item {
+  max-width: 33%;
 }
 
 .title {
@@ -119,10 +83,10 @@ a {
 }
 
 .cross-wrapper {
-  padding-top: 1.6rem;
+  margin-top: 3.7rem;
   flex-grow: 1;
   @media (min-height: 812px) and (max-height: 932px) and (-webkit-min-device-pixel-ratio: 3) {
-    padding-top: 2.8rem;
+    margin-top: 7.2rem;
   }
 }
 
@@ -176,7 +140,10 @@ a {
   display: flex;
   flex-direction: column;
   gap: 0.8rem;
-  margin-bottom: 4.4rem;
+  margin-bottom: 2.8rem;
+  @media (min-height: 812px) and (max-height: 932px) and (-webkit-min-device-pixel-ratio: 3) {
+    margin-bottom: 4.4rem;
+  }
 }
 
 .action {
@@ -223,8 +190,12 @@ a {
   display: flex;
   align-items: center;
   font-family: "SF Pro Display";
+  text-wrap: nowrap;
 }
+
 .right-block {
+  display: flex;
+  flex-direction: column;
   margin: 0 2.4rem;
   width: 15.5rem;
   @media (min-height: 812px) and (max-height: 932px) and (-webkit-min-device-pixel-ratio: 3) {
@@ -269,30 +240,4 @@ a {
   @media (min-height: 812px) and (max-height: 932px) and (-webkit-min-device-pixel-ratio: 3) {
     margin-top: 0.2rem;
   }
-}
-
-.footer_text-de {
-  font-size: 0.85rem;
-}
-.footer_text-es {
-  font-size: 1.05rem;
-}
-.footer_text-fr {
-  font-size: 0.85rem;
-}
-.footer_text-pt {
-  font-size: 1rem;
-}
-
-.offer_text-de {
-  font-size: 1.2rem;
-}
-.offer_text-es {
-  font-size: 1.6rem;
-}
-.offer_text-fr {
-  font-size: 1.35rem;
-}
-.offer_text-pt {
-  font-size: 1.55rem;
 }
