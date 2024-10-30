@@ -1,4 +1,4 @@
-@import url(fots.css);
+@import url(fonts.css);
 
 * {
   box-sizing: border-box;
@@ -8,7 +8,7 @@
 
 html {
   font-size: 1.5vh;
-  @media (min-height: 812px) and (max-height: 932px) and (-webkit-min-device-pixel-ratio: 3) {
+  @media screen and (max-aspect-ratio: 0.5) {
     font-size: 1.185vh;
   }
 }
@@ -22,7 +22,7 @@ body {
   @media (max-height: 736px) and (-webkit-min-device-pixel-ratio: 3) {
     background-image: url(/img/bgFor8plus.jpg);
   }
-  @media (min-height: 812px) and (max-height: 932px) and (-webkit-min-device-pixel-ratio: 3) {
+  @media only screen and (min-width: 375px) and (min-height: 812px) and (-webkit-min-device-pixel-ratio: 3) {
     background-image: url(/img/bg@3x.jpg);
   }
 }
@@ -46,7 +46,7 @@ a {
   text-decoration: none;
   color: #ffffff;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
   text-wrap: nowrap;
   width: 26.2rem;
   height: 1.5rem;
@@ -55,13 +55,17 @@ a {
   letter-spacing: 0.058rem;
   opacity: 0.5;
   margin-bottom: 1.05rem;
-  @media (min-height: 812px) and (max-height: 932px) and (-webkit-min-device-pixel-ratio: 3) {
+  @media only screen and (min-width: 375px) and (min-height: 812px) and (-webkit-min-device-pixel-ratio: 3) {
     margin-bottom: 3.1rem;
   }
 }
 
 .footer_item {
   max-width: 33%;
+}
+
+.footer_item:not(:last-child) {
+  margin-right: 0.5rem;
 }
 
 .title {
@@ -77,7 +81,7 @@ a {
   display: flex;
   flex-direction: column;
   flex-grow: 1;
-  @media (min-height: 812px) and (max-height: 932px) and (-webkit-min-device-pixel-ratio: 3) {
+  @media only screen and (min-width: 375px) and (min-height: 812px) and (-webkit-min-device-pixel-ratio: 3) {
     width: 34.2rem;
   }
 }
@@ -85,7 +89,7 @@ a {
 .cross-wrapper {
   margin-top: 3.7rem;
   flex-grow: 1;
-  @media (min-height: 812px) and (max-height: 932px) and (-webkit-min-device-pixel-ratio: 3) {
+  @media only screen and (min-width: 375px) and (min-height: 812px) and (-webkit-min-device-pixel-ratio: 3) {
     margin-top: 7.2rem;
   }
 }
@@ -99,7 +103,7 @@ a {
   display: flex;
   justify-content: space-between;
   margin: 4.04rem 0;
-  @media (min-height: 812px) and (max-height: 932px) and (-webkit-min-device-pixel-ratio: 3) {
+  @media only screen and (min-width: 375px) and (min-height: 812px) and (-webkit-min-device-pixel-ratio: 3) {
     margin: 4.07rem 0 4.97rem 0;
   }
 }
@@ -141,7 +145,7 @@ a {
   flex-direction: column;
   gap: 0.8rem;
   margin-bottom: 2.8rem;
-  @media (min-height: 812px) and (max-height: 932px) and (-webkit-min-device-pixel-ratio: 3) {
+  @media only screen and (min-width: 375px) and (min-height: 812px) and (-webkit-min-device-pixel-ratio: 3) {
     margin-bottom: 4.4rem;
   }
 }
@@ -157,7 +161,7 @@ a {
   position: relative;
 }
 
-@media (min-height: 812px) and (max-height: 932px) and (-webkit-min-device-pixel-ratio: 3) {
+@media only screen and (min-width: 375px) and (min-height: 812px) and (-webkit-min-device-pixel-ratio: 3) {
   .actions > .action:nth-child(3) {
     margin-top: 0.8rem;
   }
@@ -166,13 +170,13 @@ a {
 .offer {
   background-color: #ffffff1a;
   border: none;
-  padding: 0.1rem;
+  border: 0.1rem solid transparent;
 }
 
 .isActive {
   padding: 0rem;
   background-color: #ffffff4d;
-  border: 0.1rem solid #ffffff;
+  border-color: #ffffff;
 }
 
 .button-continue {
@@ -198,7 +202,7 @@ a {
   flex-direction: column;
   margin: 0 2.4rem;
   width: 15.5rem;
-  @media (min-height: 812px) and (max-height: 932px) and (-webkit-min-device-pixel-ratio: 3) {
+  @media only screen and (min-width: 375px) and (min-height: 812px) and (-webkit-min-device-pixel-ratio: 3) {
     width: 16.8rem;
   }
 }
@@ -219,7 +223,7 @@ a {
   position: absolute;
   z-index: 1;
   transform: translate(+155%, -50%);
-  @media (min-height: 812px) and (max-height: 932px) and (-webkit-min-device-pixel-ratio: 3) {
+  @media only screen and (min-width: 375px) and (min-height: 812px) and (-webkit-min-device-pixel-ratio: 3) {
     transform: translate(+170%, -50%);
   }
 }
@@ -237,7 +241,7 @@ a {
 
 .actions > .action:nth-child(1) > .action-content > .left-block {
   margin-top: 0.1rem;
-  @media (min-height: 812px) and (max-height: 932px) and (-webkit-min-device-pixel-ratio: 3) {
+  @media only screen and (min-width: 375px) and (min-height: 812px) and (-webkit-min-device-pixel-ratio: 3) {
     margin-top: 0.2rem;
   }
 }

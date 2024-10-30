@@ -1,8 +1,8 @@
-function setLang() {
-  const langs = ["en", "de", "es", "fr", "ja", "pt"];
-  const langParams = new URL(window.location.href).searchParams.get("lang");
+const langs = ["en", "de", "es", "fr", "ja", "pt"];
+const fallbackLang = "en";
 
-  const fallbackLang = "en";
+function setLang() {
+  const langParams = new URL(window.location.href).searchParams.get("lang");
   const osLang = navigator.language;
 
   let lang;
@@ -25,7 +25,7 @@ function changeFontSize(lang) {
 
 async function loadTranslations(lang) {
   try {
-    const response = await fetch("/i18n/" + lang + ".json");
+    const response = await fetch("./i18n/" + lang + ".json");
     return response.json();
   } catch (error) {
     console.log(error);
@@ -65,31 +65,18 @@ function setTranslations(translateData) {
     translateData["Restore"];
 }
 
-function changeFontSizes() {
-  const elems = document.getElementsByClassName("dynamic_text");
-  console.log(elems);
-  for (let i = 0; i < elems.length; i++) {
-    let refFontSize = parseFloat(
-      window.getComputedStyle(elems[i]).getPropertyValue("font-size")
+const dynamicFontSizeElems = document.querySelectorAll(".dynamic_text");
+function adjustFontSize(elems) {
+  elems.forEach((elem) => {
+    let currentFontSize = parseFloat(
+      window.getComputedStyle(elem).getPropertyValue("font-size")
     );
-    console.log(elems[i].offsetWidth);
-    elems[i].style.fontSize = refFontSize + "px";
-    while (elems[i].offsetWidth > elems[i].parentNode.offsetWidth) {
-      refFontSize = refFontSize - 0.5;
-      elems[i].style.fontSize = refFontSize + "px";
-      if (refFontSize <= 6) break;
+    while (elem.offsetWidth > elem.parentNode.offsetWidth) {
+      currentFontSize -= 0.5;
+      elem.style.fontSize = currentFontSize + "px";
     }
-  }
+  });
 }
-
-(async () => {
-  const lang = setLang();
-  changeFontSize(lang);
-
-  const translations = await loadTranslations(lang);
-  setTranslations(translations);
-  changeFontSizes();
-})();
 
 const offers = document.querySelectorAll(".offer");
 let currentOffer = "https://apple.com/";
@@ -113,3 +100,17 @@ function setClassActive() {
   });
 }
 setClassActive();
+
+(async () => {
+  const lang = setLang();
+  changeFontSize(lang);
+
+  const translations = await loadTranslations(lang);
+
+  if (!translations) {
+    console.log("Translations not found");
+    return;
+  }
+  setTranslations(translations);
+  adjustFontSize(dynamicFontSizeElems);
+})();
