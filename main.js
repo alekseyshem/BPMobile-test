@@ -3,7 +3,7 @@ const fallbackLang = "en";
 
 function setLang() {
   const langParams = new URL(window.location.href).searchParams.get("lang");
-  const osLang = navigator.language;
+  const osLang = navigator.language.slice(0, 2);
 
   let lang;
   if (langParams && langs.includes(langParams)) {
@@ -66,6 +66,8 @@ function setTranslations(translateData) {
 }
 
 const dynamicFontSizeElems = document.querySelectorAll(".dynamic_text");
+const footerItems = document.querySelectorAll(".footer_item");
+
 function adjustFontSize(elems) {
   elems.forEach((elem) => {
     let currentFontSize = parseFloat(
@@ -76,6 +78,29 @@ function adjustFontSize(elems) {
       elem.style.fontSize = currentFontSize + "px";
     }
   });
+}
+
+function setAvgValidFontSize(elems) {
+  const validWidth =
+    elems[0].parentNode.parentNode.offsetWidth - 0.5 * (elems.length - 1);
+  let currentFontSize = parseFloat(
+    window.getComputedStyle(elems[0].parentNode).getPropertyValue("font-size")
+  );
+
+  let elemsSumWidth = 0;
+  elems.forEach((elem) => {
+    elemsSumWidth += elem.offsetWidth;
+  });
+
+  while (elemsSumWidth > validWidth) {
+    currentFontSize -= 0.5;
+    elemsSumWidth = 0;
+    elems.forEach((elem) => {
+      elem.style.fontSize = currentFontSize + "px";
+      elemsSumWidth += elem.offsetWidth;
+    });
+    if (currentFontSize <= 8) break;
+  }
 }
 
 const offers = document.querySelectorAll(".offer");
@@ -113,4 +138,5 @@ setClassActive();
   }
   setTranslations(translations);
   adjustFontSize(dynamicFontSizeElems);
+  setAvgValidFontSize(footerItems);
 })();

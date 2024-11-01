@@ -1,5 +1,3 @@
-@import url(fonts.css);
-
 * {
   box-sizing: border-box;
   margin: 0;
@@ -14,6 +12,7 @@ html {
 }
 
 body {
+  font-family: -apple-system, "SF Pro", sans-serif;
   color: #ffffff;
   width: 100%;
   height: 100vh;
@@ -42,7 +41,7 @@ a {
 }
 
 .footer {
-  font-family: "SF Pro Display";
+  font-family: -apple-system, "SF Pro Display", sans-serif;
   text-decoration: none;
   color: #ffffff;
   display: flex;
@@ -60,16 +59,11 @@ a {
   }
 }
 
-.footer_item {
-  max-width: 33%;
-}
-
-.footer_item:not(:last-child) {
+.footer_wrapper:not(:last-child) {
   margin-right: 0.5rem;
 }
 
 .title {
-  font-family: "SF Pro Bold";
   font-size: 4.2rem;
   text-align: center;
   font-weight: 860;
@@ -128,7 +122,6 @@ a {
 }
 
 .image {
-  font-family: "SF Pro";
   background-size: 10.4rem 13.8rem;
   width: 10.4rem;
   height: 13.8rem;
@@ -168,6 +161,7 @@ a {
 }
 
 .offer {
+  font-family: -apple-system, "SF Pro Display", sans-serif;
   background-color: #ffffff1a;
   border: none;
   border: 0.1rem solid transparent;
@@ -180,6 +174,7 @@ a {
 }
 
 .button-continue {
+  font-family: -apple-system, "SF Pro", sans-serif;
   font-size: 2rem;
   line-height: 2.4rem;
   font-weight: 590;
@@ -193,7 +188,6 @@ a {
   color: #ffffff;
   display: flex;
   align-items: center;
-  font-family: "SF Pro Display";
   text-wrap: nowrap;
 }
 
